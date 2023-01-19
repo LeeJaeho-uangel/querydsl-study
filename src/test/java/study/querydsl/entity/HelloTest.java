@@ -27,6 +27,7 @@ class HelloTest {
   public void helloTest() {
     Hello hello = new Hello();
     em.persist(hello);
+    em.flush();
 
     QHello q = new QHello("q");
     Hello result = queryFactory
