@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
+import static study.querydsl.entity.QHello.hello;
+
 @SpringBootTest
 @Transactional
 class HelloTest {
@@ -25,13 +27,13 @@ class HelloTest {
 
   @Test
   public void helloTest() {
-    Hello hello = new Hello();
-    em.persist(hello);
+    Hello hello1 = new Hello();
+    em.persist(hello1);
     em.flush();
 
-    QHello q = new QHello("q");
+//    QHello q = new QHello("q");
     Hello result = queryFactory
-        .selectFrom(q)
+        .selectFrom(hello)
         .fetchOne();
 
     System.out.println("result = " + result);
