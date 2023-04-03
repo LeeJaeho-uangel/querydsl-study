@@ -5,6 +5,7 @@ import com.querydsl.core.Tuple;
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPAExpressions;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import study.querydsl.dto.MemberDto;
 import study.querydsl.dto.QMemberDto;
 import study.querydsl.dto.UserDto;
@@ -425,11 +427,11 @@ class MemberTest {
         .where(usernameEq(strParam), ageEq(intParam))
         .fetch();
   }
-  private Predicate usernameEq(String strParam) {
-    return !Objects.equals(strParam, null) ? member.username.equalsIgnoreCase(strParam) : null;
+  private BooleanExpression usernameEq(String strParam) {
+    return StringUtils.hasText(strParam) ? member.username.equalsIgnoreCase(strParam) : null;
   }
 
-  private Predicate ageEq(Integer intParam) {
+  private BooleanExpression ageEq(Integer intParam) {
     return !Objects.equals(intParam, null) ? member.age.eq(intParam) : null;
   }
 

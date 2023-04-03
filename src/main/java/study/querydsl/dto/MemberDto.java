@@ -7,13 +7,13 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class UserDto {
-  private String name;
+public class MemberDto {
+  private String username;
   private int age;
 
   @QueryProjection
-  public UserDto(String name, int age) {
-    this.name = name;
+  public MemberDto(String username, int age) {
+    this.username = username;
     this.age = age;
   }
 }
